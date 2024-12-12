@@ -1,0 +1,43 @@
+spin_manifest_version = 2
+
+[application]
+name = "challenge-one"
+version = "0.1.0"
+authors = ["garrardkitchen"]
+description = "Advent of spin - Challenge 1 - 2024"
+
+[[trigger.http]]
+route = "/api/wishlists"
+component = "api-get-wishlists"
+
+[component.api-get-wishlists]
+source = "api-get-wishlists/target/api-get-wishlists.wasm"
+allowed_outbound_hosts = []
+key_value_stores = ["default"]
+
+[component.api-get-wishlists.build]
+command = "npm run build"
+workdir = "api-get-wishlists"
+
+#[[trigger.http]]
+#route = "/..."
+#component = "index"
+#files = [{ source = "static/**", destination = "/" }]
+
+#[component.index]
+#source = "index/target/index.wasm"
+#allowed_outbound_hosts = []
+#[component.index.variables]
+#message = "Advent of Spin, '24!"
+
+#[component.index.build]
+#command = "npm run build"
+#workdir = "index"
+
+[[trigger.http]]
+route = "/..."
+component = "fs"
+
+[component.fs]
+source = { url = "https://github.com/fermyon/spin-fileserver/releases/download/v0.3.0/spin_static_fs.wasm", digest = "sha256:ef88708817e107bf49985c7cefe4dd1f199bf26f6727819183d5c996baa3d148" }
+files = [{ source = "assets", destination = "/" }]
