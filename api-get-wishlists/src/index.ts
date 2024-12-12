@@ -1,11 +1,5 @@
 import { ResponseBuilder, Kv} from "@fermyon/spin-sdk";
 
-
-// interface WishList {
-//     name: string;
-//     items: string[];
-// }
-
 const encoder = new TextEncoder()
 const decoder = new TextDecoder()   
 
@@ -37,7 +31,7 @@ export async function handler(req: Request, res: ResponseBuilder) {
         }
 
         if (!body.name || !Array.isArray(body.items)) {
-            return res.status(400).send("Invalid WishList format");
+            return res.status(400).send("Mal-formatted request");
         }
 
         wishlists.push(body);
